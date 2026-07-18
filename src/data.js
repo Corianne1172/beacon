@@ -5,6 +5,7 @@ export const CLIENTS = [
     name: 'Mrs. Rodriguez',
     age: 78,
     address: '4210 S Ashland Ave',
+    lat: 41.8158, lng: -87.6647,
     status: 'visit',
     detail: 'No AC · lives alone · reported thirsty',
     inZone: true,
@@ -20,12 +21,16 @@ export const CLIENTS = [
       { when: 'June heat event', what: 'Visited · safe' },
     ],
   },
-  { id: 'dw', initials: 'DW', name: 'Dorothy W.', age: 84, address: '5017 S Damen Ave', status: 'visit', detail: 'In zone · cardiac condition', inZone: true, tags: ['Cardiac condition', 'Lives with spouse'], symptoms: [], history: [] },
-  { id: 'jk', initials: 'JK', name: 'James K.', age: 71, address: '4633 S Wood St', status: 'noreply', detail: 'In zone · 2 texts unanswered', inZone: true, tags: ['Mobility limited'], symptoms: [], history: [] },
-  { id: 'hp', initials: 'HP', name: 'Harold P.', age: 69, address: '4390 S Honore St', status: 'noreply', detail: 'In zone · 1 text unanswered', inZone: true, tags: ['COPD'], symptoms: [], history: [] },
-  { id: 'at', initials: 'AT', name: 'Alice T.', age: 75, address: '5122 S Paulina St', status: 'safe', detail: 'Safe · 11:42 AM', inZone: false, tags: ['Lives alone'], symptoms: [], history: [] },
-  { id: 'gb', initials: 'GB', name: 'Gloria B.', age: 80, address: '4820 S Hermitage Ave', status: 'safe', detail: 'Safe · daughter confirmed', inZone: false, tags: [], symptoms: [], history: [] },
+  { id: 'dw', initials: 'DW', name: 'Dorothy W.', age: 84, address: '5017 S Damen Ave', lat: 41.8018, lng: -87.6752, status: 'visit', detail: 'In zone · cardiac condition', inZone: true, tags: ['Cardiac condition', 'Lives with spouse'], symptoms: [], history: [] },
+  { id: 'jk', initials: 'JK', name: 'James K.', age: 71, address: '4633 S Wood St', lat: 41.8083, lng: -87.6699, status: 'noreply', detail: 'In zone · 2 texts unanswered', inZone: true, tags: ['Mobility limited'], symptoms: [], history: [] },
+  { id: 'hp', initials: 'HP', name: 'Harold P.', age: 69, address: '4390 S Honore St', lat: 41.8135, lng: -87.6725, status: 'noreply', detail: 'In zone · 1 text unanswered', inZone: true, tags: ['COPD'], symptoms: [], history: [] },
+  { id: 'at', initials: 'AT', name: 'Alice T.', age: 75, address: '5122 S Paulina St', lat: 41.7999, lng: -87.6669, status: 'safe', detail: 'Safe · 11:42 AM', inZone: false, tags: ['Lives alone'], symptoms: [], history: [] },
+  { id: 'gb', initials: 'GB', name: 'Gloria B.', age: 80, address: '4820 S Hermitage Ave', lat: 41.8062, lng: -87.6688, status: 'safe', detail: 'Safe · daughter confirmed', inZone: false, tags: [], symptoms: [], history: [] },
 ]
+
+export const CAREGIVER_POS = { lat: 41.8225, lng: -87.6520 }
+export const COOLING_CENTER = { lat: 41.8095, lng: -87.6580, name: 'King Community Center' }
+export const HEAT_ZONE = { lat: 41.8115, lng: -87.6690, radius: 800 }
 
 export const RESOURCES = {
   cooling: [

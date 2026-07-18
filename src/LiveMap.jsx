@@ -67,11 +67,8 @@ export function LiveRoute({ height = 260 }) {
     }).addTo(map)
 
     L.circle([41.8125, -87.6635], {
-      radius: 220,
-      color: '#c94f2e',
-      weight: 1,
-      fillColor: '#c94f2e',
-      fillOpacity: 0.18,
+      radius: 220, color: '#c94f2e', weight: 1,
+      fillColor: '#c94f2e', fillOpacity: 0.18,
     }).addTo(map).bindTooltip('Road closed — buckled pavement')
 
     L.circleMarker([from.lat, from.lng], { radius: 8, color: '#fff', weight: 2.5, fillColor: '#2b5d8f', fillOpacity: 1 })
@@ -79,22 +76,23 @@ export function LiveRoute({ height = 260 }) {
     L.circleMarker([to.lat, to.lng], { radius: 8, color: '#fff', weight: 2.5, fillColor: '#c94f2e', fillOpacity: 1 })
       .addTo(map).bindTooltip('Mrs. Rodriguez')
 
-    const fallback = () => {
-      L.polyline([[from.lat, from.lng], [to.lat, to.lng]], {
-        color: '#2b5d8f', weight: 4, dashArray: '2 10',
-      }).addTo(map)
-    }
+    const fallbackLine = L.polyline(
+      [[from.lat, from.lng], [to.lat, to.lng]],
+      { color: '#2b5d8f', weight: 4, dashArray: '2 10' },
+    ).addTo(map)
+    map.fitBounds(fallbackLine.getBounds(), { padding: [30, 30] })
 
     fetch(`https://router.project-osrm.org/route/v1/driving/${from.lng},${from.lat};${to.lng},${to.lat}?overview=full&geometries=geojson`)
       .then((r) => r.json())
       .then((j) => {
         const coords = j?.routes?.[0]?.geometry?.coordinates
-        if (!coords) return fallback()
+        if (!coords) return
+        map.removeLayer(fallbackLine)
         const latlngs = coords.map(([lng, lat]) => [lat, lng])
         const line = L.polyline(latlngs, { color: '#2b5d8f', weight: 5, opacity: 0.9 }).addTo(map)
         map.fitBounds(line.getBounds(), { padding: [24, 24] })
       })
-      .catch(fallback)
+      .catch(() => {})
 
     return () => map.remove()
   }, [])

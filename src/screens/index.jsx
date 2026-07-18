@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { CLIENTS, RESOURCES, REPORTS } from '../data.js'
-import { LiveMap, LiveRoute } from '../LiveMap.jsx'
 
 const WMO = {
   0: ['☀️', 'Clear'], 1: ['🌤', 'Mostly clear'], 2: ['⛅', 'Partly cloudy'], 3: ['☁️', 'Overcast'],
@@ -347,10 +346,28 @@ export function MapScreen({ go }) {
         <span><span className="dot" style={{ background: 'var(--alert)' }}></span>Needs visit</span>
       </div>
       <div className="mapbox">
-        <LiveMap go={go} height={280} />
+        <svg viewBox="0 0 354 300">
+          <rect width="354" height="300" fill="#eef0ea" />
+          <line x1="0" y1="70" x2="354" y2="70" stroke="#d8dbd2" strokeWidth="6" />
+          <line x1="0" y1="160" x2="354" y2="160" stroke="#d8dbd2" strokeWidth="6" />
+          <line x1="0" y1="240" x2="354" y2="240" stroke="#d8dbd2" strokeWidth="4" />
+          <line x1="90" y1="0" x2="90" y2="300" stroke="#d8dbd2" strokeWidth="6" />
+          <line x1="200" y1="0" x2="200" y2="300" stroke="#d8dbd2" strokeWidth="4" />
+          <line x1="290" y1="0" x2="290" y2="300" stroke="#d8dbd2" strokeWidth="6" />
+          <rect x="60" y="40" width="160" height="150" rx="10" fill="#c94f2e" opacity="0.13" />
+          <text x="70" y="60" fontSize="11" fill="#c94f2e" fontFamily="Sora" fontWeight="600">Highest heat index</text>
+          <circle cx="120" cy="110" r="9" fill="#c94f2e" stroke="#fff" strokeWidth="2.5" style={{ cursor: 'pointer' }} onClick={() => go('client')} />
+          <circle cx="170" cy="150" r="9" fill="#b07c10" stroke="#fff" strokeWidth="2.5" style={{ cursor: 'pointer' }} onClick={() => go('client')} />
+          <circle cx="250" cy="90" r="9" fill="#1d7a5f" stroke="#fff" strokeWidth="2.5" />
+          <circle cx="300" cy="200" r="9" fill="#1d7a5f" stroke="#fff" strokeWidth="2.5" />
+          <circle cx="70" cy="250" r="9" fill="#1d7a5f" stroke="#fff" strokeWidth="2.5" />
+          <circle cx="230" cy="255" r="9" fill="#c94f2e" stroke="#fff" strokeWidth="2.5" style={{ cursor: 'pointer' }} onClick={() => go('client')} />
+          <rect x="310" y="60" width="16" height="16" rx="4" fill="#2b5d8f" />
+          <text x="303" y="94" fontSize="9.5" fill="#2b5d8f" fontFamily="Sora" fontWeight="600">Cooling ctr</text>
+        </svg>
       </div>
       <p style={{ fontSize: 12, color: 'var(--muted)', padding: '6px 20px', lineHeight: 1.5 }}>
-        Live OpenStreetMap. Tap a red or amber pin to open that client. Blue pin = nearest cooling center. Shaded circle = highest heat index zone.
+        Tap a red or amber pin to open that client. Blue square = nearest cooling center.
       </p>
       <button className="btn primary" onClick={() => go('route')}>Route to Mrs. Rodriguez</button>
       <div className="spacer" />
@@ -369,10 +386,23 @@ export function RouteScreen({ go }) {
       </div>
       <WeatherStrip />
       <div className="mapbox">
-        <LiveRoute height={250} />
+        <svg viewBox="0 0 354 260">
+          <rect width="354" height="260" fill="#eef0ea" />
+          <line x1="0" y1="200" x2="354" y2="200" stroke="#d8dbd2" strokeWidth="8" />
+          <line x1="180" y1="0" x2="180" y2="260" stroke="#d8dbd2" strokeWidth="8" />
+          <line x1="0" y1="70" x2="354" y2="70" stroke="#d8dbd2" strokeWidth="8" />
+          <line x1="80" y1="0" x2="80" y2="260" stroke="#d8dbd2" strokeWidth="5" />
+          <rect x="60" y="90" width="90" height="80" rx="8" fill="#c94f2e" opacity="0.15" />
+          <text x="66" y="110" fontSize="10" fill="#c94f2e" fontFamily="Sora" fontWeight="600">Road closed —</text>
+          <text x="66" y="123" fontSize="10" fill="#c94f2e" fontFamily="Sora" fontWeight="600">buckled pavement</text>
+          <path d="M 30 200 L 180 200 L 180 70 L 320 70" fill="none" stroke="#2b5d8f" strokeWidth="5" strokeLinecap="round" strokeDasharray="1 10" />
+          <circle cx="30" cy="200" r="8" fill="#2b5d8f" stroke="#fff" strokeWidth="2.5" />
+          <text x="18" y="225" fontSize="10" fill="#2b5d8f" fontFamily="Sora" fontWeight="600">You</text>
+          <circle cx="320" cy="70" r="8" fill="#c94f2e" stroke="#fff" strokeWidth="2.5" />
+          <text x="295" y="50" fontSize="10" fill="#c94f2e" fontFamily="Sora" fontWeight="600">Mrs. R</text>
+        </svg>
       </div>
       <div className="card">
-        <div className="kv"><span className="k">Route engine</span><span className="v">OSRM · live driving route</span></div>
         <div className="kv"><span className="k">Original route</span><span className="v strike">12 min</span></div>
         <div className="kv"><span className="k">Rerouted via S Racine</span><span className="v">18 min</span></div>
         <div className="kv"><span className="k">Avoiding</span><span className="v red">Buckled road, W 43rd St</span></div>
